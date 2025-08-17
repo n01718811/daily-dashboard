@@ -1,40 +1,17 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
+Daily Dashboard
 
-## Getting Started
+The Daily Dashboard is a Next.js web application designed to give users quick access to weather updates, the latest news, and customizable preferences. It demonstrates the use of React components, API integration, state management with React Context, and dynamic routing.
 
-First, run the development server:
+Project Structure
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+The project is organized into several key folders and files. The components folder contains reusable UI elements, such as cards and forms, which are shared across multiple pages. The context folder contains AppContext.js, which is the core of the application’s global state management. The pages directory defines the app’s routes, with each file corresponding to a different view of the application.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The home page (/) serves as a landing page with navigation links to the main sections. The weather page (/weather) displays live weather information based on the user’s preferred location. The news page (/news) lists the latest news headlines fetched from a third-party API, and it includes a dynamic route (/news/[id]) for showing detailed information about a specific article. Finally, the settings page (/settings) allows users to configure their location and unit preferences, as well as save or reset them.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+The API layer is handled with custom endpoints inside the pages/api directory. For example, the /api/now endpoint fetches weather data from the Open-Meteo API, while the /api/top endpoint retrieves news articles from a Google News RSS feed and formats them as JSON.
 
-[API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+State Management
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) instead of React pages.
+Global state is managed through React Context inside the AppContext.js file. This ensures that important data such as the user’s location, temperature unit (Celsius or Fahrenheit), and saved preferences are available across all pages. To improve user experience, the app integrates localStorage, so preferences are remembered even after refreshing the page.
 
-This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn-pages-router) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying) for more details.
+The Settings page is where users can interact with this state. They can update their location, switch units, and choose to either save or reset their preferences. Because the application uses shared context, changes made here are immediately reflected throughout the app.
